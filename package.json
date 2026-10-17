@@ -1,0 +1,46 @@
+{
+  "name": "viswcag",
+  "version": "1.0.0",
+  "description": "Open-source accessibility checker that tests web pages against WCAG 2.2 and marks every finding on an annotated snapshot. Runs locally.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "wcag22",
+    "audit",
+    "checker",
+    "crawler",
+    "puppeteer"
+  ],
+  "homepage": "https://github.com/5hachaf/viswcag#readme",
+  "bugs": {
+    "url": "https://github.com/5hachaf/viswcag/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5hachaf/viswcag.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "main": "src/scanner.js",
+  "bin": {
+    "viswcag": "bin/viswcag.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "scan": "node bin/viswcag.js",
+    "test": "node test/run.js"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "@crawlee/cheerio": "^3.18.2",
+    "@crawlee/memory-storage": "^3.18.2",
+    "@crawlee/utils": "^3.18.2",
+    "@fontsource/atkinson-hyperlegible-mono": "^5.3.0",
+    "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
+    "express": "^4.22.3",
+    "puppeteer": "^25.12.0"
+  }
+}

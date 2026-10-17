@@ -1,0 +1,12 @@
+/*
+ * Atkinson Hyperlegible Next and Mono (SIL Open Font License 1.1), served locally
+ * from the @fontsource packages by server.js so the interface makes no requests to
+ * other sites. Each file covers Latin and Latin Extended; browsers download only the
+ * subsets a page uses.
+ */
+@import url("/fonts/next/400.css");
+@import url("/fonts/next/500.css");
+@import url("/fonts/next/700.css");
+@import url("/fonts/next/800.css");
+@import url("/fonts/mono/400.css");
+@import url("/fonts/mono/500.css");

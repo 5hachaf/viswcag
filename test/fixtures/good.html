@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessible fixture</title>
+  <style>
+    body { font-family: sans-serif; color: #1a1a1a; background: #fff; margin: 0; padding: 16px; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #1d5fd1; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <a href="#main">Skip to main content</a>
+  <header><nav aria-label="Primary"><a href="/about">About the ferry</a></nav></header>
+  <main id="main">
+    <h1>Accessible fixture</h1>
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="200" height="100" alt="Ferry crossing the bay">
+    <h2>Contact form</h2>
+    <form>
+      <label for="name">Your name</label>
+      <input id="name" type="text" autocomplete="name">
+      <label for="mail">Email</label>
+      <input id="mail" type="email" autocomplete="email">
+      <fieldset>
+        <legend>Ticket type</legend>
+        <input type="radio" id="r1" name="t"><label for="r1">Single</label>
+        <input type="radio" id="r2" name="t"><label for="r2">Return</label>
+      </fieldset>
+      <button type="submit">Send message</button>
+    </form>
+    <h2>Sign in</h2>
+    <form>
+      <label for="user">Email</label>
+      <input id="user" type="email" autocomplete="username">
+      <label for="pass">Password</label>
+      <input id="pass" type="password" autocomplete="current-password">
+      <button type="submit">Sign in</button>
+    </form>
+    <table>
+      <caption>Departures</caption>
+      <tr><th scope="col">Route</th><th scope="col">Time</th></tr>
+      <tr><td>North</td><td>06:00</td></tr>
+    </table>
+  </main>
+  <footer><p>Footer text</p></footer>
+</body>
+</html>

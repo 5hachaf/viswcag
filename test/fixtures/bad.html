@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- Test fixture: deliberately inaccessible page. Every issue here is intentional and checked by test/run.js. -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+  <title>Harbor Ferry Co. — Timetables and tickets</title>
+  <style>
+    body { font-family: Georgia, serif; margin: 0; color: #222; background: #fff; }
+    header { background: #0b3d5c; color: #fff; padding: 16px 32px; display: flex; align-items: center; gap: 24px; }
+    header a { color: #cfe8f7; }
+    .skip { position: absolute; left: -9999px; }
+    .wrap { width: 1024px; margin: 0 auto; padding: 24px 32px; }
+    .hero { background: linear-gradient(120deg, #4fb3d9, #0b3d5c); color: #fff; padding: 40px; border-radius: 8px; }
+    .faint { color: #a8a8a8; }
+    .tiny { font-size: 9px; color: #666; }
+    .promo { font-size: 22px; font-weight: 700; margin: 24px 0 8px; }
+    .nofocus:focus { outline: none; }
+    .card { border: 1px solid #ddd; border-radius: 6px; padding: 16px; margin: 16px 0; }
+    .icon-btn { width: 36px; height: 36px; border: 0; border-radius: 50%; background: #0b3d5c; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    table { border-collapse: collapse; width: 100%; }
+    td { border: 1px solid #ccc; padding: 6px 10px; }
+    label { display: block; margin-top: 12px; }
+    input, select { font: inherit; padding: 6px; }
+    footer { background: #f4f4f4; padding: 24px 32px; color: #b5b5b5; }
+    /* WCAG 2.2 fixtures */
+    .mini { width: 16px; height: 16px; padding: 0; margin: 0 2px; border: 0; background: #0b3d5c; color: #fff; font-size: 10px; line-height: 16px; }
+    .cookie { position: fixed; left: 0; right: 0; bottom: 0; height: 96px; background: #222; color: #fff; padding: 16px 32px; box-sizing: border-box; }
+    .cookie button { font: inherit; padding: 8px 16px; }
+    .login { margin-top: 24px; }
+    .order li { padding: 6px; border: 1px solid #ccc; margin: 4px 0; list-style: none; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content-start">Skip to main content</a>
+  <header>
+    <a href="/index.html"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23fff'/%3E%3C/svg%3E" width="40" height="40"></a>
+    <a href="/index.html">Harbor Ferry Co.</a>
+    <nav>
+      <a href="#timetable">Timetable</a> ·
+      <a href="#tickets" tabindex="3">Tickets</a> ·
+      <a href="#contact" class="nofocus">Contact</a>
+    </nav>
+    <button class="icon-btn" onclick="void 0"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" stroke="#fff" fill="none" stroke-width="2"/></svg></button>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <h1>Cross the bay in 25 minutes</h1>
+      <p>Departures every half hour from Pier 3, seven days a week.</p>
+    </div>
+
+    <p class="promo">Summer pass now on sale</p>
+    <p class="faint">Passes are valid from June through September on all routes.</p>
+    <p>Want the details? <a href="/pass.html">Click here</a>.</p>
+
+    <h4>Route map</h4>
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='160'%3E%3Crect width='600' height='160' fill='%23e7f3f9'/%3E%3Cpath d='M40 120 Q 300 0 560 110' stroke='%230b3d5c' stroke-width='4' fill='none'/%3E%3C/svg%3E" width="600" height="160">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Crect width='120' height='80' fill='%23cde'/%3E%3C/svg%3E" alt="image" width="120" height="80">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Crect width='120' height='80' fill='%23fed'/%3E%3C/svg%3E" alt="Ferry docked at Pier 3 at sunset" width="120" height="80">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='8'%3E%3Crect width='120' height='8' fill='%23abc'/%3E%3C/svg%3E" alt="" width="120" height="8">
+
+    <h2 id="timetable">Timetable</h2>
+    <h3></h3>
+    <table>
+      <tr><td>Route</td><td>First boat</td><td>Last boat</td></tr>
+      <tr><td>Pier 3 → Northside</td><td>06:00</td><td>23:30</td></tr>
+      <tr><td>Northside → Pier 3</td><td>06:30</td><td>23:59</td></tr>
+    </table>
+    <p class="tiny">Times may change on public holidays.</p>
+
+    <div class="grid">
+      <section class="card" id="tickets">
+        <h2>Buy tickets</h2>
+        <form>
+          <input type="text" placeholder="Full name">
+          <label for="email">Email</label>
+          <input type="email" id="email">
+          <label for="phone-number">Phone</label>
+          <input type="tel" id="phone" autocomplete="phone">
+          <input type="text" aria-labelledby="missing-label-id">
+          <p>Ticket type</p>
+          <input type="radio" name="ticket" id="t1" value="single"><label for="t1">Single</label>
+          <input type="radio" name="ticket" id="t2" value="return"><label for="t2">Return</label>
+          <select><option>Adult</option><option>Child</option></select>
+          <button type="submit" aria-label="Purchase">Buy now</button>
+        </form>
+      </section>
+      <section class="card" id="contact">
+        <h2>Contact</h2>
+        <div role="buttn" tabindex="0">Call us</div>
+        <span id="contact">Duplicate id on purpose</span>
+        <li>Lost property: Pier 3 office</li>
+        <a href="/help.html"><button>Help centre</button></a>
+        <a href="/pass.html"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40'%3E%3Crect width='60' height='40' fill='%23fc6'/%3E%3C/svg%3E" alt="Summer pass" width="60" height="40"></a>
+        <a href="/pass.html">Summer pass</a>
+        <a href="https://example.org/feedback"><i class="icon-chat"></i></a>
+        <iframe srcdoc="<p>Weather widget</p>" width="260" height="60"></iframe>
+      </section>
+    </div>
+
+    <!-- WCAG 2.2 fixtures -->
+    <section class="card login" aria-labelledby="login-h">
+      <h2 id="login-h">Sign in</h2>
+      <p>Gallery: <button class="mini" aria-label="Previous photo">&lsaquo;</button><button class="mini" aria-label="Next photo">&rsaquo;</button></p>
+      <label for="pw1">Password</label>
+      <input type="password" id="pw1" autocomplete="current-password" onpaste="return false">
+      <label for="pw2">Staff PIN</label>
+      <input type="password" id="pw2" autocomplete="off">
+      <label for="card-no">Card number</label>
+      <input type="text" id="card-no" aria-describedby="card-hint" autocomplete="cc-number">
+      <p id="card-hint">16 digits, no spaces.</p>
+      <p id="card-hint">Found on the front of your card.</p>
+      <ul class="order" aria-label="Trip order">
+        <li draggable="true">Pier 3</li>
+        <li draggable="true">Northside</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Harbor Ferry Co. All crossings subject to weather.</p>
+    <p><a href="/privacy.html">Privacy and cookies</a></p>
+  </footer>
+  <div class="cookie" role="region" aria-label="Cookie notice">We use cookies to remember your ticket basket. <button type="button">Accept</button></div>
+</body>
+</html>

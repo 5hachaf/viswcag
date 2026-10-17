@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script src="/theme.js"></script>
+  <title>What VisWCAG checks — VisWCAG</title>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="topbar">
+    <a href="/" class="topbar-brand">
+      <span class="brand-dots" aria-hidden="true"><i class="d-error"></i><i class="d-alert"></i><i class="d-pass"></i></span>
+      <span>VisWCAG</span>
+    </a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false" title="Dark mode">
+      <span class="visually-hidden">Dark mode</span>
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+  <main id="main" class="catalogue" tabindex="-1">
+    <h1>What VisWCAG checks</h1>
+    <p class="lede">Every check maps to one or more success criteria in <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a> Level A and AA. Automated testing finds roughly a third of accessibility problems, so a page with no errors still needs review with a keyboard and a screen reader.</p>
+    <div id="catalogue"><p>Loading the rule list…</p></div>
+  </main>
+  <script>
+    (async function () {
+      const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      const box = document.getElementById('catalogue');
+      try {
+        const { rules, wcag, coverage22 } = await (await fetch('/api/rules')).json();
+        const label = { error: 'Errors', alert: 'Alerts', pass: 'Passed checks' };
+        const intro = {
+          error: 'Failures that automated testing can confirm. Each one should be fixed.',
+          alert: 'Likely problems that need a person to judge whether they fail WCAG.',
+          pass: 'Things the page does correctly, recorded so you can see what was tested.',
+        };
+        const COVERAGE = { automated: 'Tested automatically', partial: 'Partly tested', manual: 'Check manually' };
+        const scLink = (c) => '<a href="' + esc(wcag[c].spec) + '">' + c + ' ' + esc(wcag[c].name) + ' (' + wcag[c].level + ')</a>';
+        const news = '<section aria-labelledby="h-new"><h2 id="h-new">New in WCAG 2.2</h2>' +
+          '<p>WCAG 2.2 adds these Level A and AA success criteria and removes 4.1.1 Parsing. Duplicate ids are now an error only when a label or ARIA attribute points at them.</p>' +
+          '<div class="table-wrap" role="region" aria-labelledby="cap-new" tabindex="0"><table class="data-table"><caption id="cap-new">How VisWCAG covers the new criteria</caption>' +
+          '<thead><tr><th scope="col">Success criterion</th><th scope="col">Coverage</th><th scope="col">How</th></tr></thead><tbody>' +
+          coverage22.map((c) => '<tr><th scope="row">' + scLink(c.sc) + '</th><td><span class="cov cov-' + c.coverage + '">' + COVERAGE[c.coverage] + '</span></td><td>' + esc(c.note) + '</td></tr>').join('') +
+          '</tbody></table></div></section>';
+        box.innerHTML = news + ['error', 'alert', 'pass'].map((t) => {
+          const list = Object.entries(rules).filter(([, r]) => r.type === t);
+          return '<section aria-labelledby="h-' + t + '"><h2 id="h-' + t + '"><span class="badge ' + t + '" aria-hidden="true">' + list.length + '</span>' + label[t] + '</h2><p>' + intro[t] + '</p>' +
+            list.map(([id, r]) => '<article class="cat-rule" id="' + id + '"><h3>' + esc(r.title) + '</h3><p>' + esc(r.summary) + '</p><p>' +
+              r.sc.map(scLink).join(', ') + (r.sc.some((c) => wcag[c].added) ? ' <span class="new-tag">New in 2.2</span>' : '') +
+              '</p></article>').join('') + '</section>';
+        }).join('');
+      } catch (e) {
+        box.innerHTML = '<p>The rule list could not be loaded. Make sure the VisWCAG server is running.</p>';
+      }
+    })();
+  </script>
+</body>
+</html>
